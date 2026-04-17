@@ -1,6 +1,16 @@
 # 🚀 AI Sales Decision Copilot
 
-An AI-powered backend system that transforms raw business datasets into *decision-ready insights* — not just dashboards.
+An AI-powered backend system that transforms raw business datasets into **decision-ready insights** — not just dashboards.
+
+---
+
+## 📸 Project Demo
+
+### 🔹 API Overview
+![API Overview](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-16%20035336.png)
+
+### 🔹 Ask Business Question
+![Ask Question](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-16%20040140.png)
 
 ---
 
@@ -8,102 +18,137 @@ An AI-powered backend system that transforms raw business datasets into *decisio
 
 Most data projects stop at visualisation.
 
-This project goes further.
+We build dashboards.  
+We track metrics.  
+We observe trends.  
 
-👉 Upload a dataset  
-👉 Ask a business question  
-👉 Get structured insights instantly  
+But when it’s time to make decisions…
+
+We still rely on manual interpretation.
+
+👉 This project solves that gap.
+
+The **AI Sales Decision Copilot** allows users to:
+- Upload structured datasets (CSV / Excel)
+- Ask business questions in natural language
+- Receive structured, decision-ready insights instantly
 
 ---
 
 ## ⚙️ Key Features
 
-- Upload CSV / Excel files  
-- Automatic dataset analysis  
-- Question-answer matching system  
-- Insight extraction (Answer + Type + Confidence)  
-- FastAPI backend with Swagger UI  
+- 📊 Upload CSV/XLSX datasets  
+- 🤖 Ask business questions in natural language  
+- 🧠 Intelligent question matching system  
+- 📈 Structured insights with:
+  - Answer  
+  - Insight Type  
+  - Confidence Level  
+- ⚡ FastAPI backend with Swagger UI  
+- 🧩 Lightweight and scalable architecture  
 
 ---
 
-## 🧱 Tech Stack
+## 🛠️ Tech Stack
 
 - Python  
 - FastAPI  
 - Pandas  
 - Uvicorn  
 - OpenPyXL  
+- REST API  
 
 ---
 
-## 🖥️ How It Works
+## 📁 Project Structure
 
-1. Upload dataset via API  
-2. System reads and analyses data  
-3. Ask a business question  
-4. Backend finds best match  
-5. Returns structured insight  
-
----
-
-## 📂 API Endpoints
-
-### GET /
-Check if backend is running
-
-### POST /upload
-Upload dataset and get summary
-
-### POST /ask
-Ask a question and receive insights
+backend/
+ ├── main.py  
+ ├── model_utils.py  
+ ├── data/  
+ ├── notebooks/  
 
 ---
 
-## 🧪 Example
+## ⚙️ How to Run
 
-*Question:*  
+1. Clone the repository:
+
+git clone https://github.com/kamranafridi9220-prog/ai-sales-decision-copilot
+
+2. Navigate to backend:
+
+cd backend
+
+3. Install dependencies:
+
+pip install fastapi uvicorn pandas python-multipart openpyxl
+
+4. Run the API:
+
+uvicorn main:app --reload
+
+5. Open in browser:
+
+http://127.0.0.1:8000/docs
+
+---
+
+## 🧪 Example Use Case
+
+1. Upload dataset  
+2. Ask question:
+
 Which regions have the highest business concentration?
 
-*Response:*  
-- Answer  
-- Insight Type  
+3. Get structured response:
+
+- Matched Question  
+- Business Insight  
+- Insight Type (e.g., Geographic Analysis)  
 - Confidence Level  
 
 ---
 
-## 🚧 Challenges Faced
+## ⚠️ Challenges Faced
 
-- Handling CSV vs Excel formats  
-- Matching natural language questions  
-- Managing inconsistent datasets  
-- Making outputs business-friendly  
-
----
-
-## 💡 Next Steps
-
-- Cloud deployment (Render)  
-- Add semantic search (AI embeddings)  
-- Build frontend interface  
-- Improve decision logic  
+- Handling file uploads (CSV vs Excel parsing)  
+- Designing meaningful question-matching logic  
+- Working with limited dataset size  
+- Structuring insights for business readability  
+- Debugging API errors (500, validation issues)  
 
 ---
 
-## 🔗 Project Status
+## 🚀 Future Improvements
 
-✔ Backend complete  
-✔ API tested locally  
-🚧 Deployment in progress  
+- Add Machine Learning-based semantic search  
+- Integrate LLM (GPT) for advanced reasoning  
+- Build a frontend UI (Streamlit / Web App)  
+- Enable real-time dataset connections  
+- Improve scalability for large datasets  
+
+---
+
+## 💡 Key Insight
+
+This project moves beyond traditional BI dashboards by introducing a **decision layer** on top of raw data.
+
+👉 From:  
+Data → Visualisation  
+
+👉 To:  
+Data → Insight → Decision  
 
 ---
 
 ## 👤 Author
 
 Kamran Khan  
-Business Intelligence & AI Enthusiast  
+Corporate Account Executive | Business Intelligence & AI Enthusiast  
 
 ---
 
-## ⭐ If you find this useful
+## 🔗 Project Link
 
-Give this repo a star ⭐
+https://github.com/kamranafridi9220-prog/ai-sales-decision-copilot
