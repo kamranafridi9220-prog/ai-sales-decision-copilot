@@ -12,6 +12,9 @@ An AI-powered backend system that transforms raw business datasets into **decisi
 ### 🔹 Ask Business Question
 ![Ask Question](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-16%20040140.png)
 
+### 🔹 AI Decision Output (Final Result)
+
+![AI Decision Output](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-17%20035811.png)
 ---
 
 ## 📌 Overview
