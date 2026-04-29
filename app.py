@@ -88,6 +88,31 @@ def parse_response(text):
     return sections
 
 
+def build_report(parsed, question):
+    return f"""
+AI Sales Decision Report
+
+Question:
+{question}
+
+----------------------------
+Key Insight:
+{parsed['Key Insight']}
+
+Business Implication:
+{parsed['Business Implication']}
+
+Recommendation:
+{parsed['Recommendation']}
+
+Confidence Level:
+{parsed['Confidence Level']}
+
+Next Best Action:
+{parsed['Next Best Action']}
+"""
+
+
 if uploaded_file:
     if uploaded_file.name.endswith(".csv"):
         df = pd.read_csv(uploaded_file)
@@ -109,24 +134,37 @@ if uploaded_file:
 
             st.success("AI analysis completed")
 
-            col1, col2 = st.columns(2)
+            tab1, tab2 = st.tabs(["📊 Decision Output", "📥 Download"])
 
-            with col1:
-                st.markdown("### 📊 Key Insight")
-                st.write(parsed["Key Insight"])
+            with tab1:
+                col1, col2 = st.columns(2)
 
-                st.markdown("### 💼 Business Implication")
-                st.write(parsed["Business Implication"])
+                with col1:
+                    st.markdown("### 📊 Key Insight")
+                    st.write(parsed["Key Insight"])
 
-                st.markdown("### 🎯 Recommendation")
-                st.write(parsed["Recommendation"])
+                    st.markdown("### 💼 Business Implication")
+                    st.write(parsed["Business Implication"])
 
-            with col2:
-                st.markdown("### 📈 Confidence Level")
-                st.write(parsed["Confidence Level"])
+                    st.markdown("### 🎯 Recommendation")
+                    st.write(parsed["Recommendation"])
 
-                st.markdown("### ⚡ Next Best Action")
-                st.write(parsed["Next Best Action"])
+                with col2:
+                    st.markdown("### 📈 Confidence Level")
+                    st.write(parsed["Confidence Level"])
+
+                    st.markdown("### ⚡ Next Best Action")
+                    st.write(parsed["Next Best Action"])
+
+            with tab2:
+                report_text = build_report(parsed, user_question)
+
+                st.download_button(
+                    label="📥 Download Full Report",
+                    data=report_text,
+                    file_name="ai_decision_report.txt",
+                    mime="text/plain"
+                )
 
         else:
             st.warning("Please enter a question.")
