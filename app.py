@@ -64,8 +64,8 @@ st.markdown(
     }
 
     .metric-number {
-        font-size: 48px;
-        font-weight: 800;
+        font-size: 50px;
+        font-weight: 850;
         line-height: 1.05;
         margin-bottom: 14px;
         color: #111827;
@@ -111,28 +111,6 @@ st.markdown(
         color: #cbd5e1;
         font-size: 15px;
         line-height: 1.55;
-    }
-
-    .benefit-card {
-        background: #0f172a;
-        border: 1px solid #26384f;
-        border-radius: 22px;
-        padding: 28px;
-        min-height: 190px;
-        margin-bottom: 18px;
-    }
-
-    .benefit-title {
-        color: white;
-        font-size: 22px;
-        font-weight: 750;
-        margin-bottom: 10px;
-    }
-
-    .benefit-text {
-        color: #cbd5e1;
-        font-size: 16px;
-        line-height: 1.6;
     }
 
     .soft-divider {
@@ -198,7 +176,7 @@ st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
 
 st.markdown('<div class="section-title">How the Decision Copilot Works</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="section-subtitle">A simple decision-support workflow inspired by how commercial teams analyse opportunities.</div>',
+    '<div class="section-subtitle">A simple AI workflow inspired by how commercial teams analyse opportunities.</div>',
     unsafe_allow_html=True
 )
 
@@ -237,36 +215,6 @@ with agent3:
             <div class="agent-title">⚡ Action Planner</div>
             <div class="agent-text">
                 Suggests the next best action so teams can move from analysis to execution faster.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
-
-left_benefit, right_benefit = st.columns([1, 1.25])
-
-with left_benefit:
-    st.markdown(
-        """
-        <div class="benefit-card">
-            <div class="benefit-title">The AI layer between dashboards and decisions</div>
-            <div class="benefit-text">
-                Traditional dashboards show what happened. This copilot helps explain what it means and what should happen next.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with right_benefit:
-    st.markdown(
-        """
-        <div class="benefit-card">
-            <div class="benefit-title">Designed for sales, growth, and revenue teams</div>
-            <div class="benefit-text">
-                Ask questions about segments, customer opportunities, revenue gaps, follow-up priorities, or growth focus areas.
             </div>
         </div>
         """,
