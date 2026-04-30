@@ -20,64 +20,68 @@ st.markdown(
 
     .hero {
         background: linear-gradient(135deg, #061a40 0%, #0b3d91 55%, #0f62fe 100%);
-        padding: 55px 60px;
-        border-radius: 26px;
-        margin-bottom: 35px;
+        padding: 58px 62px;
+        border-radius: 28px;
+        margin-bottom: 34px;
         color: white;
-    }
-
-    .hero-title {
-        font-size: 56px;
-        font-weight: 800;
-        line-height: 1.05;
-        margin-bottom: 22px;
-    }
-
-    .hero-subtitle {
-        font-size: 20px;
-        line-height: 1.5;
-        max-width: 780px;
-        color: #dbeafe;
     }
 
     .pill {
         display: inline-block;
-        padding: 8px 15px;
+        padding: 8px 16px;
         background: rgba(255,255,255,0.16);
-        border: 1px solid rgba(255,255,255,0.25);
+        border: 1px solid rgba(255,255,255,0.28);
         border-radius: 999px;
         margin-bottom: 22px;
         font-size: 14px;
         color: #ffffff;
     }
 
-    .agent-card {
-        background: #101827;
-        border: 1px solid #24364f;
-        border-radius: 20px;
-        padding: 24px;
-        min-height: 170px;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    .hero-title {
+        font-size: 58px;
+        font-weight: 850;
+        line-height: 1.05;
+        margin-bottom: 22px;
+        max-width: 950px;
     }
 
-    .agent-title {
-        font-size: 22px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 8px;
+    .hero-subtitle {
+        font-size: 20px;
+        line-height: 1.55;
+        max-width: 820px;
+        color: #dbeafe;
     }
 
-    .agent-text {
-        color: #cbd5e1;
-        font-size: 15px;
-        line-height: 1.5;
+    .metric-card {
+        background: #f8f5ef;
+        border: 1px solid #e5e0d8;
+        border-radius: 24px;
+        padding: 34px 28px;
+        min-height: 190px;
+        color: #111827;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .metric-number {
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 1.05;
+        margin-bottom: 14px;
+        color: #111827;
+    }
+
+    .metric-text {
+        font-size: 18px;
+        line-height: 1.45;
+        color: #111827;
     }
 
     .section-title {
         font-size: 34px;
         font-weight: 800;
         color: white;
-        margin-top: 20px;
+        margin-top: 35px;
         margin-bottom: 12px;
     }
 
@@ -87,17 +91,54 @@ st.markdown(
         margin-bottom: 22px;
     }
 
-    .result-card {
-        background: #0f172a;
-        border: 1px solid #26384f;
-        border-radius: 18px;
+    .agent-card {
+        background: #101827;
+        border: 1px solid #24364f;
+        border-radius: 22px;
         padding: 24px;
-        margin-bottom: 20px;
+        min-height: 175px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.24);
     }
 
-    .small-muted {
-        color: #94a3b8;
-        font-size: 14px;
+    .agent-title {
+        font-size: 22px;
+        font-weight: 750;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .agent-text {
+        color: #cbd5e1;
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+    .benefit-card {
+        background: #0f172a;
+        border: 1px solid #26384f;
+        border-radius: 22px;
+        padding: 28px;
+        min-height: 190px;
+        margin-bottom: 18px;
+    }
+
+    .benefit-title {
+        color: white;
+        font-size: 22px;
+        font-weight: 750;
+        margin-bottom: 10px;
+    }
+
+    .benefit-text {
+        color: #cbd5e1;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .soft-divider {
+        height: 1px;
+        background: #26384f;
+        margin: 34px 0;
     }
     </style>
     """,
@@ -111,42 +152,85 @@ st.markdown(
         <div class="hero-title">Turn sales data into decisions — not just dashboards.</div>
         <div class="hero-subtitle">
             Upload a dataset, ask a business question, and let an AI decision copilot analyse patterns,
-            explain implications, recommend action, and generate a practical next step.
+            explain business implications, recommend action, and generate a practical next step.
         </div>
     </div>
     """,
     unsafe_allow_html=True
 )
 
-col_a, col_b, col_c = st.columns(3)
+metric1, metric2, metric3 = st.columns(3)
 
-with col_a:
+with metric1:
+    st.markdown(
+        """
+        <div class="metric-card">
+            <div class="metric-number">3x</div>
+            <div class="metric-text">faster movement from raw data to business recommendation</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with metric2:
+    st.markdown(
+        """
+        <div class="metric-card">
+            <div class="metric-number">5</div>
+            <div class="metric-text">structured outputs: insight, implication, recommendation, confidence, action</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with metric3:
+    st.markdown(
+        """
+        <div class="metric-card">
+            <div class="metric-number">1</div>
+            <div class="metric-text">workflow that connects data analysis with decision-making</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
+
+st.markdown('<div class="section-title">How the Decision Copilot Works</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="section-subtitle">A simple decision-support workflow inspired by how commercial teams analyse opportunities.</div>',
+    unsafe_allow_html=True
+)
+
+agent1, agent2, agent3 = st.columns(3)
+
+with agent1:
     st.markdown(
         """
         <div class="agent-card">
             <div class="agent-title">📊 Data Interpreter</div>
             <div class="agent-text">
-                Reads the uploaded dataset structure, column patterns, and sample records to understand the business context.
+                Reads dataset columns, sample records, and summary statistics to understand the business context behind the numbers.
             </div>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-with col_b:
+with agent2:
     st.markdown(
         """
         <div class="agent-card">
             <div class="agent-title">🧠 Decision Analyst</div>
             <div class="agent-text">
-                Converts raw data into key insights, implications, confidence levels, and decision-ready recommendations.
+                Converts patterns into clear business insight, implication, confidence level, and recommendation.
             </div>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-with col_c:
+with agent3:
     st.markdown(
         """
         <div class="agent-card">
@@ -159,11 +243,41 @@ with col_c:
         unsafe_allow_html=True
     )
 
-st.markdown("---")
+st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
+
+left_benefit, right_benefit = st.columns([1, 1.25])
+
+with left_benefit:
+    st.markdown(
+        """
+        <div class="benefit-card">
+            <div class="benefit-title">The AI layer between dashboards and decisions</div>
+            <div class="benefit-text">
+                Traditional dashboards show what happened. This copilot helps explain what it means and what should happen next.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with right_benefit:
+    st.markdown(
+        """
+        <div class="benefit-card">
+            <div class="benefit-title">Designed for sales, growth, and revenue teams</div>
+            <div class="benefit-text">
+                Ask questions about segments, customer opportunities, revenue gaps, follow-up priorities, or growth focus areas.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
 
 st.markdown('<div class="section-title">Upload Dataset</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="section-subtitle">Upload a CSV or Excel file containing sales, customer, or lead data.</div>',
+    '<div class="section-subtitle">Upload a CSV or Excel file containing sales, customer, lead, or growth data.</div>',
     unsafe_allow_html=True
 )
 
