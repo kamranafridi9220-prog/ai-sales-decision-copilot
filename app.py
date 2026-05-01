@@ -88,14 +88,6 @@ st.markdown(
         margin-bottom: 20px;
     }
 
-    .insight-card {
-        background: #0b1220;
-        border: 1px solid #1e293b;
-        border-radius: 18px;
-        padding: 22px;
-        margin-bottom: 16px;
-    }
-
     .soft-divider {
         height: 1px;
         background: #1e293b;
@@ -119,8 +111,8 @@ st.markdown(
         <div class="pill">AI-Powered Business Performance Dashboard</div>
         <div class="hero-title">Turn uploaded sales data into KPIs, charts, and decisions.</div>
         <div class="hero-subtitle">
-            Upload a CSV or Excel file, explore performance metrics, visualise revenue, cost and profit,
-            then ask AI business questions to generate decision-ready recommendations.
+            Upload a CSV or Excel file, filter the business view, explore revenue, cost and profit,
+            then ask AI questions to generate decision-ready recommendations.
         </div>
     </div>
     """,
@@ -171,7 +163,7 @@ def ask_ai(question, data_context):
             {
                 "role": "user",
                 "content": f"""
-You are analysing a business performance dataset.
+You are analysing a filtered business performance dashboard.
 
 Dataset context:
 {data_context}
@@ -238,18 +230,19 @@ def parse_response(text):
     return sections
 
 
-def build_report(parsed, question, total_revenue, total_cost, total_profit, margin):
+def build_report(parsed, question, total_revenue, total_cost, total_profit, margin, total_rows):
     return f"""
 AI Sales Decision Copilot Report
 
 Business Question:
 {question}
 
-Dashboard KPIs:
+Filtered Dashboard KPIs:
 Total Revenue: {format_currency(total_revenue)}
 Total Cost: {format_currency(total_cost)}
 Total Profit: {format_currency(total_profit)}
 Profit Margin: {format_percent(margin)}
+Filtered Records: {total_rows}
 
 Key Insight:
 {parsed['Key Insight']}
@@ -268,6 +261,20 @@ Next Best Action:
 """
 
 
+def style_chart(fig):
+    fig.update_layout(
+        paper_bgcolor="#020617",
+        plot_bgcolor="#020617",
+        font_color="#f8fafc",
+        title_font_color="#f8fafc",
+        legend_font_color="#f8fafc",
+        margin=dict(l=20, r=20, t=55, b=20)
+    )
+    fig.update_xaxes(gridcolor="#1e293b")
+    fig.update_yaxes(gridcolor="#1e293b")
+    return fig
+
+
 if uploaded_file:
     if uploaded_file.name.endswith(".csv"):
         df = pd.read_csv(uploaded_file)
@@ -276,7 +283,9 @@ if uploaded_file:
 
     df = clean_column_names(df)
 
-    st.success("Dataset uploaded successfully.")
+    if df.empty:
+        st.error("The uploaded dataset is empty. Please upload a valid file.")
+        st.stop()
 
     revenue_col = find_column(df, ["Revenue", "Sales", "Total Sales", "Amount", "Income"])
     cost_col = find_column(df, ["Cost", "Costs", "Expense", "Expenses", "Total Cost"])
@@ -300,21 +309,88 @@ if uploaded_file:
         df["Calculated Profit"] = df[revenue_col] - df[cost_col]
         profit_col = "Calculated Profit"
 
+    if date_col:
+        df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
+
+    st.success("Dataset uploaded successfully.")
+
     st.markdown('<div class="section-title">Dataset Preview</div>', unsafe_allow_html=True)
     st.dataframe(df.head(10), use_container_width=True)
 
     st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
 
-    total_revenue = df[revenue_col].sum() if revenue_col else 0
-    total_cost = df[cost_col].sum() if cost_col else 0
-    total_profit = df[profit_col].sum() if profit_col else 0
+    # SIDEBAR FILTERS
+    st.sidebar.header("Dashboard Filters")
+
+    filtered_df = df.copy()
+
+    if date_col and filtered_df[date_col].notna().any():
+        min_date = filtered_df[date_col].min().date()
+        max_date = filtered_df[date_col].max().date()
+
+        selected_dates = st.sidebar.date_input(
+            "Date Range",
+            value=(min_date, max_date),
+            min_value=min_date,
+            max_value=max_date
+        )
+
+        if isinstance(selected_dates, tuple) and len(selected_dates) == 2:
+            start_date, end_date = selected_dates
+            filtered_df = filtered_df[
+                (filtered_df[date_col].dt.date >= start_date) &
+                (filtered_df[date_col].dt.date <= end_date)
+            ]
+
+    if segment_col:
+        segment_options = sorted(filtered_df[segment_col].dropna().astype(str).unique())
+        selected_segments = st.sidebar.multiselect(
+            "Segment / Category",
+            segment_options,
+            default=segment_options
+        )
+
+        if selected_segments:
+            filtered_df = filtered_df[filtered_df[segment_col].astype(str).isin(selected_segments)]
+
+    if region_col:
+        region_options = sorted(filtered_df[region_col].dropna().astype(str).unique())
+        selected_regions = st.sidebar.multiselect(
+            "Region / Location",
+            region_options,
+            default=region_options
+        )
+
+        if selected_regions:
+            filtered_df = filtered_df[filtered_df[region_col].astype(str).isin(selected_regions)]
+
+    if product_col:
+        product_options = sorted(filtered_df[product_col].dropna().astype(str).unique())
+        selected_products = st.sidebar.multiselect(
+            "Product / Service",
+            product_options,
+            default=product_options
+        )
+
+        if selected_products:
+            filtered_df = filtered_df[filtered_df[product_col].astype(str).isin(selected_products)]
+
+    st.sidebar.caption("All KPIs, charts, and AI insights use the filtered dataset.")
+
+    if filtered_df.empty:
+        st.warning("No data matches the selected filters. Please adjust your filters.")
+        st.stop()
+
+    total_revenue = filtered_df[revenue_col].sum() if revenue_col else 0
+    total_cost = filtered_df[cost_col].sum() if cost_col else 0
+    total_profit = filtered_df[profit_col].sum() if profit_col else 0
     margin = (total_profit / total_revenue * 100) if total_revenue else 0
-    total_rows = len(df)
-    unique_customers = df[customer_col].nunique() if customer_col else total_rows
+    total_rows = len(filtered_df)
+    unique_customers = filtered_df[customer_col].nunique() if customer_col else total_rows
 
     st.markdown('<div class="section-title">Business Performance Overview</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="section-subtitle">Automatically generated KPIs from your uploaded dataset.</div>',
+        '<div class="section-subtitle">KPIs update automatically based on your selected filters.</div>',
         unsafe_allow_html=True
     )
 
@@ -368,7 +444,7 @@ if uploaded_file:
         st.markdown(
             f"""
             <div class="metric-card">
-                <div class="metric-label">Records</div>
+                <div class="metric-label">Filtered Records</div>
                 <div class="metric-value">{total_rows:,}</div>
             </div>
             """,
@@ -379,7 +455,7 @@ if uploaded_file:
 
     st.markdown('<div class="section-title">Visual Performance Dashboard</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="section-subtitle">Charts change automatically based on available columns in your file.</div>',
+        '<div class="section-subtitle">Charts update automatically based on available columns and selected filters.</div>',
         unsafe_allow_html=True
     )
 
@@ -387,7 +463,7 @@ if uploaded_file:
 
     with chart_col1:
         if segment_col and revenue_col:
-            segment_revenue = df.groupby(segment_col, as_index=False)[revenue_col].sum()
+            segment_revenue = filtered_df.groupby(segment_col, as_index=False)[revenue_col].sum()
             fig = px.bar(
                 segment_revenue,
                 x=segment_col,
@@ -395,30 +471,20 @@ if uploaded_file:
                 title="Revenue by Segment / Category",
                 text_auto=True
             )
-            fig.update_layout(
-                paper_bgcolor="#020617",
-                plot_bgcolor="#020617",
-                font_color="#f8fafc"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(style_chart(fig), use_container_width=True)
         else:
             st.info("Add a Segment/Category and Revenue column to show revenue by segment.")
 
     with chart_col2:
         if segment_col and profit_col:
-            segment_profit = df.groupby(segment_col, as_index=False)[profit_col].sum()
+            segment_profit = filtered_df.groupby(segment_col, as_index=False)[profit_col].sum()
             fig = px.pie(
                 segment_profit,
                 names=segment_col,
                 values=profit_col,
                 title="Profit Share by Segment / Category"
             )
-            fig.update_layout(
-                paper_bgcolor="#020617",
-                plot_bgcolor="#020617",
-                font_color="#f8fafc"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(style_chart(fig), use_container_width=True)
         else:
             st.info("Add a Segment/Category and Profit column to show profit share.")
 
@@ -426,7 +492,7 @@ if uploaded_file:
 
     with chart_col3:
         if region_col and revenue_col:
-            region_revenue = df.groupby(region_col, as_index=False)[revenue_col].sum()
+            region_revenue = filtered_df.groupby(region_col, as_index=False)[revenue_col].sum()
             fig = px.bar(
                 region_revenue,
                 x=region_col,
@@ -434,19 +500,14 @@ if uploaded_file:
                 title="Revenue by Region / Location",
                 text_auto=True
             )
-            fig.update_layout(
-                paper_bgcolor="#020617",
-                plot_bgcolor="#020617",
-                font_color="#f8fafc"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(style_chart(fig), use_container_width=True)
         else:
             st.info("Add a Region/Location and Revenue column to show regional performance.")
 
     with chart_col4:
         if product_col and profit_col:
             product_profit = (
-                df.groupby(product_col, as_index=False)[profit_col]
+                filtered_df.groupby(product_col, as_index=False)[profit_col]
                 .sum()
                 .sort_values(by=profit_col, ascending=False)
                 .head(10)
@@ -458,25 +519,19 @@ if uploaded_file:
                 title="Top Products / Services by Profit",
                 text_auto=True
             )
-            fig.update_layout(
-                paper_bgcolor="#020617",
-                plot_bgcolor="#020617",
-                font_color="#f8fafc"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(style_chart(fig), use_container_width=True)
         else:
             st.info("Add a Product/Service and Profit column to show product performance.")
 
     if date_col and revenue_col:
-        try:
-            df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
-            trend_df = (
-                df.dropna(subset=[date_col])
-                .groupby(date_col, as_index=False)[revenue_col]
-                .sum()
-                .sort_values(by=date_col)
-            )
+        trend_df = (
+            filtered_df.dropna(subset=[date_col])
+            .groupby(date_col, as_index=False)[revenue_col]
+            .sum()
+            .sort_values(by=date_col)
+        )
 
+        if not trend_df.empty:
             fig = px.line(
                 trend_df,
                 x=date_col,
@@ -484,21 +539,13 @@ if uploaded_file:
                 title="Revenue Trend Over Time",
                 markers=True
             )
-            fig.update_layout(
-                paper_bgcolor="#020617",
-                plot_bgcolor="#020617",
-                font_color="#f8fafc"
-            )
-            st.plotly_chart(fig, use_container_width=True)
-
-        except Exception:
-            st.info("Date column found, but could not generate time trend.")
+            st.plotly_chart(style_chart(fig), use_container_width=True)
 
     st.markdown('<div class="soft-divider"></div>', unsafe_allow_html=True)
 
     st.markdown('<div class="section-title">Ask AI About This Dashboard</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="section-subtitle">Ask questions and the AI will use the dataset summary, KPIs, and sample data to produce decision-ready answers.</div>',
+        '<div class="section-subtitle">AI uses the filtered KPIs, filtered rows, and selected dashboard context.</div>',
         unsafe_allow_html=True
     )
 
@@ -522,11 +569,8 @@ if uploaded_file:
 
     if st.button("Generate AI Decision Insight", type="primary"):
         if user_question:
-            with st.spinner("AI decision copilot is analysing your dashboard..."):
+            with st.spinner("AI decision copilot is analysing your filtered dashboard..."):
                 data_context = f"""
-Columns:
-{', '.join(df.columns)}
-
 Detected Columns:
 Revenue Column: {revenue_col}
 Cost Column: {cost_col}
@@ -537,19 +581,19 @@ Region Column: {region_col}
 Product Column: {product_col}
 Customer Column: {customer_col}
 
-KPIs:
+Filtered KPIs:
 Total Revenue: {total_revenue}
 Total Cost: {total_cost}
 Total Profit: {total_profit}
 Profit Margin: {margin}
-Total Records: {total_rows}
+Filtered Records: {total_rows}
 Unique Customers: {unique_customers}
 
-Dataset Summary:
-{df.describe(include='all').to_string()}
+Filtered Dataset Summary:
+{filtered_df.describe(include='all').to_string()}
 
-Sample Data:
-{df.head(10).to_string()}
+Filtered Sample Data:
+{filtered_df.head(15).to_string()}
 """
                 result = ask_ai(user_question, data_context)
                 parsed = parse_response(result)
@@ -592,7 +636,8 @@ Sample Data:
                     total_revenue,
                     total_cost,
                     total_profit,
-                    margin
+                    margin,
+                    total_rows
                 )
 
                 st.download_button(
