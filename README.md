@@ -9,32 +9,33 @@ https://ai-sales-decision-copilot-yqnwlb6d8iqbt7cqozxnc3.streamlit.app/
 
 ## 📸 Project Demo
 
-### 🔹 Dashboard Overview
-A complete business performance dashboard showing revenue trends, regional performance, and product-level insights.
+## 📸 Project Demo
 
-![Dashboard](backend/dashboard.png)
+### 🔹 Dashboard Overview
+A full business performance dashboard showing revenue trends, regional insights, and product-level analytics.
+
+![Dashboard](Dashboard.png)
 
 ---
 
 ### 🔹 KPI Performance Metrics
-Dynamic KPI cards that automatically calculate from uploaded datasets.
+Dynamic KPI cards automatically calculated from uploaded datasets.
 
 #### 📊 Total Revenue
-![Revenue KPI](backend/kpi-revenue.png)
+![Revenue KPI](KPI's1.png)
 
 #### 💰 Total Cost
-![Cost KPI](backend/kpi-cost.png)
+![Cost KPI](KPI's2.png)
 
 #### 📈 Profit & Margin
-![Profit KPI](backend/kpi-profit.png)
+![Profit KPI](KPI's3.png)
 
 ---
 
 ### 🔹 AI Decision Output
 AI-generated structured insights based on your dataset and business question.
 
-![AI Output](backend/ai-output.png)
-
+![AI Output](AI Output.png)
 ---
 
 ## 📌 Overview
