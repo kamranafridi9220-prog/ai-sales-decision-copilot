@@ -1,157 +1,238 @@
 # 🚀 AI Sales Decision Copilot
 
-An AI-powered backend system that transforms raw business datasets into **decision-ready insights** — not just dashboards.
+An AI-powered **business performance dashboard + decision system** that transforms raw datasets into **interactive insights, visual analytics, and actionable recommendations**.
+
+🔗 **Live App:**  
+https://ai-sales-decision-copilot-yqnwlb6d8iqbt7cqozxnc3.streamlit.app/
 
 ---
 
 ## 📸 Project Demo
 
-### 🔹 API Overview
-![API Overview](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-16%20035336.png)
+### 🔹 Dashboard Overview
+![Dashboard](dashboard.png)
 
-### 🔹 Ask Business Question
-![Ask Question](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-16%20040140.png)
+### 🔹 KPI + Charts
+![KPIs](kpis.png)
 
-### 🔹 AI Decision Output (Final Result)
+### 🔹 AI Decision Output
+![AI Output](ai-output.png)
 
-![AI Decision Output](https://raw.githubusercontent.com/kamranafridi9220-prog/ai-sales-decision-copilot/main/Screenshot%202026-04-17%20035811.png)
 ---
 
 ## 📌 Overview
 
-Most data projects stop at visualisation.
+Most data tools stop at dashboards.
 
-We build dashboards.  
-We track metrics.  
-We observe trends.  
+We visualise data.  
+We track KPIs.  
+We analyse trends.  
 
-But when it’s time to make decisions…
+But when it’s time to act — decisions are still manual.
 
-We still rely on manual interpretation.
+👉 This project bridges that gap.
 
-👉 This project solves that gap.
+The **AI Sales Decision Copilot** combines:
 
-The **AI Sales Decision Copilot** allows users to:
-- Upload structured datasets (CSV / Excel)
-- Ask business questions in natural language
-- Receive structured, decision-ready insights instantly
+- 📊 Business dashboards  
+- 📈 Interactive analytics  
+- 🤖 AI-powered decision insights  
+
+All in one system.
 
 ---
 
-## ⚙️ Key Features
+## ⚙️ What This System Does
 
-- 📊 Upload CSV/XLSX datasets  
-- 🤖 Ask business questions in natural language  
-- 🧠 Intelligent question matching system  
-- 📈 Structured insights with:
-  - Answer  
-  - Insight Type  
-  - Confidence Level  
-- ⚡ FastAPI backend with Swagger UI  
-- 🧩 Lightweight and scalable architecture  
+Upload a dataset and instantly get:
+
+### 📊 Business Dashboard
+- Revenue, Cost, Profit KPIs  
+- Profit Margin calculation  
+- Record counts  
+- Dynamic filtering  
+
+### 📈 Visual Analytics
+- Revenue by segment  
+- Profit distribution (pie chart)  
+- Revenue by region  
+- Top products/services  
+- Time-based trends  
+
+### 🎯 AI Decision Layer
+
+Ask business questions like:
+
+> “Which segment should we focus on for growth?”
+
+And get:
+
+- Key Insight  
+- Business Implication  
+- Recommendation  
+- Confidence Level  
+- Next Best Action  
+
+---
+
+## 🎛️ Interactive Features
+
+- 📂 Upload CSV / Excel files  
+- 🎚️ Sidebar filters:
+  - Segment  
+  - Region  
+  - Product  
+  - Date range  
+- 🔄 Real-time KPI updates  
+- 📊 Charts update dynamically based on filters  
+- 🧠 AI uses filtered dataset context  
+- 📥 Download full decision report  
+
+---
+
+## 🧠 Why This Matters
+
+Traditional BI:
+
+👉 Data → Dashboard  
+
+This system:
+
+👉 Data → Dashboard → Insight → Decision  
+
+It acts as a **decision assistant**, not just a reporting tool.
+
+---
+
+## 🧪 Data Tested On
+
+The system has been tested on:
+
+- Sales datasets  
+- Revenue & cost data  
+- Customer & lead data  
+- SME business datasets (services, facilities, cleaning, security)  
+- Multi-column Excel & CSV files  
+
+It automatically detects:
+
+- Revenue / Cost / Profit  
+- Segment / Category  
+- Region / Location  
+- Product / Service  
+- Date fields  
+
+---
+
+## 👥 Who Can Use This
+
+- Sales teams → identify growth opportunities  
+- Founders / SMEs → understand performance quickly  
+- Account managers → prioritise leads & accounts  
+- Analysts → reduce manual reporting  
+- Any Excel user → convert data into decisions  
 
 ---
 
 ## 🛠️ Tech Stack
 
 - Python  
-- FastAPI  
+- Streamlit  
 - Pandas  
-- Uvicorn  
+- Plotly  
+- OpenAI API  
 - OpenPyXL  
-- REST API  
 
 ---
 
-## 📁 Project Structure
+## 🧩 System Architecture
 
-backend/
- ├── main.py  
- ├── model_utils.py  
- ├── data/  
- ├── notebooks/  
+The app combines:
+
+1. **Data Processing Layer**
+   - Column detection  
+   - Data cleaning  
+   - KPI calculation  
+
+2. **Dashboard Layer**
+   - KPIs  
+   - Charts  
+   - Filters  
+
+3. **AI Decision Layer**
+   - Context-aware analysis  
+   - Structured insights  
+   - Action recommendations  
 
 ---
 
-## ⚙️ How to Run
+## 🚀 How to Run Locally
 
-1. Clone the repository:
-
+```bash
 git clone https://github.com/kamranafridi9220-prog/ai-sales-decision-copilot
-
-2. Navigate to backend:
-
-cd backend
-
-3. Install dependencies:
-
-pip install fastapi uvicorn pandas python-multipart openpyxl
-
-4. Run the API:
-
-uvicorn main:app --reload
-
-5. Open in browser:
-
-http://127.0.0.1:8000/docs
+cd ai-sales-decision-copilot
+pip install -r requirements.txt
+streamlit run app.py
+```
 
 ---
 
-## 🧪 Example Use Case
+## 🔐 API Configuration
 
-1. Upload dataset  
-2. Ask question:
+Create a `.env` file:
 
-Which regions have the highest business concentration?
-
-3. Get structured response:
-
-- Matched Question  
-- Business Insight  
-- Insight Type (e.g., Geographic Analysis)  
-- Confidence Level  
+```
+OPENAI_API_KEY=your_api_key_here
+```
 
 ---
 
 ## ⚠️ Challenges Faced
 
-- Handling file uploads (CSV vs Excel parsing)  
-- Designing meaningful question-matching logic  
-- Working with limited dataset size  
-- Structuring insights for business readability  
-- Debugging API errors (500, validation issues)  
+- Handling dynamic datasets with different column names  
+- Mapping real-world business data to structured insights  
+- Designing filter-based analytics logic  
+- Integrating AI with dashboard context  
+- UI/UX improvements for professional feel  
+- Streamlit deployment and dependency handling  
 
 ---
 
-## 🚀 Future Improvements
+## 🔮 Future Improvements
 
-- Add Machine Learning-based semantic search  
-- Integrate LLM (GPT) for advanced reasoning  
-- Build a frontend UI (Streamlit / Web App)  
-- Enable real-time dataset connections  
-- Improve scalability for large datasets  
+- Dynamic chart switching based on questions  
+- Scenario simulation (what-if analysis)  
+- CRM integrations (HubSpot / Salesforce)  
+- Multi-agent workflows (analysis → strategy → outreach)  
+- Real-time data connections  
+
+---
+
+## 📌 Current Status
+
+Version: v2.0  
+Status: Live, functional, and actively evolving  
 
 ---
 
 ## 💡 Key Insight
 
-This project moves beyond traditional BI dashboards by introducing a **decision layer** on top of raw data.
+This project demonstrates a shift from:
 
-👉 From:  
-Data → Visualisation  
-
-👉 To:  
-Data → Insight → Decision  
+❌ Static dashboards  
+➡️ To  
+✅ Intelligent decision systems  
 
 ---
 
 ## 👤 Author
 
-Kamran Khan  
-Corporate Account Executive | Business Intelligence & AI Enthusiast  
+Kamran Afridi  
+Business Intelligence | AI Decision Systems | Sales Analytics  
+London, UK  
 
 ---
 
-## 🔗 Project Link
+## ⭐ If you found this useful
 
-https://github.com/kamranafridi9220-prog/ai-sales-decision-copilot
+Give it a star ⭐ and connect with me on LinkedIn.
