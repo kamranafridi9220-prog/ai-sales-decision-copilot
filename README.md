@@ -245,7 +245,7 @@ This project demonstrates a shift from:
 
 ## 👤 Author
 
-Kamran Afridi  
+Kamran Khan  
 Business Intelligence | AI Decision Systems | Sales Analytics  
 London, UK  
 
