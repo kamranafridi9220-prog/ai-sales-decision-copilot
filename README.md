@@ -35,7 +35,7 @@ Dynamic KPI cards automatically calculated from uploaded datasets.
 ### 🔹 AI Decision Output
 AI-generated structured insights based on your dataset and business question.
 
-![AI Output](AI Output.png)
+![AI Output](AI_Output.png)
 ---
 
 ## 📌 Overview
