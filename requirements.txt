@@ -3,4 +3,4 @@ pandas
 openpyxl
 openai
 python-dotenv
-python-dotenv
+plotly
