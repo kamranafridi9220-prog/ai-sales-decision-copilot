@@ -9,8 +9,6 @@ https://ai-sales-decision-copilot-yqnwlb6d8iqbt7cqozxnc3.streamlit.app/
 
 ## 📸 Project Demo
 
-## 📸 Project Demo
-
 ### 🔹 Dashboard Overview
 A full business performance dashboard showing revenue trends, regional insights, and product-level analytics.
 
@@ -37,6 +35,14 @@ AI-generated structured insights based on your dataset and business question.
 
 ![AI Output](AI_Output.png)
 ---
+
+## 🔎 Project Positioning
+
+This project is designed as an AI-powered decision intelligence system for business and revenue teams.
+
+Rather than functioning as a traditional reporting dashboard, the platform combines analytics, KPI monitoring, and AI-generated recommendations to support operational and strategic decision-making.
+
+The goal is to demonstrate how AI can move beyond passive reporting and assist organisations with actionable business insights and next-best actions.
 
 ## 📌 Overview
 
@@ -184,6 +190,13 @@ The app combines:
 
 ---
 
+## 🔄 Decision Workflow
+
+Dataset Upload → Data Processing → KPI Generation → Interactive Dashboard → AI Insight Engine → Business Recommendation → Downloadable Decision Report
+
+This workflow demonstrates how structured analytics and AI reasoning can work together inside a unified business intelligence system.
+
+---
 ## 🚀 How to Run Locally
 
 ```bash
@@ -216,13 +229,30 @@ OPENAI_API_KEY=your_api_key_here
 
 ---
 
+## 🏗️ Production Roadmap
+
+Future enterprise-ready enhancements could include:
+
+- Real-time database connectivity
+- User authentication and saved workspaces
+- Role-based dashboards
+- Vector-based retrieval for historical analysis
+- Scenario forecasting and predictive analytics
+- Multi-agent decision orchestration
+- API deployment for enterprise integration
+- CRM and ERP integrations
+
+---
 ## 🔮 Future Improvements
 
 - Dynamic chart switching based on questions  
 - Scenario simulation (what-if analysis)  
 - CRM integrations (HubSpot / Salesforce)  
 - Multi-agent workflows (analysis → strategy → outreach)  
-- Real-time data connections  
+- Real-time data connections
+- Retrieval-Augmented Generation (RAG)
+- Predictive forecasting models
+- Persistent AI memory and context retention
 
 ---
 
