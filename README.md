@@ -39,6 +39,19 @@ AI-generated structured insights based on your dataset and business question.
 
 ![Architecture](ai-sales-decision-copilot-architecture.png)
 ---
+# Business Impact
+
+This platform demonstrates how AI-powered analytics systems can support:
+
+- KPI monitoring
+- Revenue analysis
+- Executive reporting
+- Sales trend analysis
+- Strategic decision-making
+- AI-assisted business intelligence
+
+The project combines interactive dashboards, analytics workflows, and AI-generated insights to simulate modern decision-support systems used within commercial environments.
+---
 ## 🔎 Project Positioning
 
 This project is designed as an AI-powered decision intelligence system for business and revenue teams.
