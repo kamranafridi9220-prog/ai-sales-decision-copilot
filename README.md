@@ -35,7 +35,10 @@ AI-generated structured insights based on your dataset and business question.
 
 ![AI Output](AI_Output.png)
 ---
+# System Architecture
 
+![Architecture](ai-sales-decision-copilot-architecture.png)
+---
 ## 🔎 Project Positioning
 
 This project is designed as an AI-powered decision intelligence system for business and revenue teams.
